@@ -1,0 +1,11 @@
+.cloud-base-enterprise-record-body {
+    .o_document_url {
+        display: flex;
+
+        .fa-globe {
+            margin-top: 4px;
+            margin-right: 2px;
+        }
+        .o_field_url { overflow-wrap: anywhere }
+    }
+}

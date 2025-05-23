@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="sync_model_view_search" model="ir.ui.view">
+        <field name="name">sync.model.search</field>
+        <field name="model">sync.model</field>
+        <field name="inherit_id" ref="cloud_base.sync_model_view_search"/>
+        <field name="arch" type="xml">
+            <filter name="ttype_group" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </filter>
+        </field>
+    </record>
+    <record id="sync_model_view_form" model="ir.ui.view" >
+        <field name="name">sync.model.form.documents</field>
+        <field name="model">sync.model</field>
+        <field name="inherit_id" ref="cloud_base.sync_model_view_form"/>
+        <field name="arch" type="xml">
+            <group name="type_group" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </group>
+            <group name="model_settings" position="after">
+                <div invisible="rule_type != 'document'">
+                    <field name="doc_domain" widget="domain" options="{'model': 'documents.folder'}" style="min-height:200px !important;"/>
+                </div>
+            </group>
+        </field>
+    </record>
+    <record id="sync_model_view_tree" model="ir.ui.view">
+        <field name="name">sync.model.tree.documents</field>
+        <field name="model">sync.model</field>
+        <field name="inherit_id" ref="cloud_base.sync_model_view_tree"/>
+        <field name="arch" type="xml">
+            <tree position="attributes">
+                <attribute name="decoration-info">rule_type == 'document'</attribute>
+            </tree>
+            <field name="rule_type" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>

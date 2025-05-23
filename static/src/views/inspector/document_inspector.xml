@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+    <t t-name="documents.DocumentsInspector.documentsInfo" t-inherit="documents.DocumentsInspector.documentsInfo" t-inherit-mode="extension">
+        <xpath expr="//t[contains(@t-if, 'url')]" position="after">
+            <tr t-if="records[0].data.cloud_key and records[0].data.url">
+                <td class="o_inspector_label align-middle">
+                    <span>
+                        URL
+                    </span>
+                </td>
+                <td class="o_inspector_value w-100">
+                    <a target="_blank" t-att-href="records[0].data.url" t-on-click="(ev) => this.onOpenCloudLink(ev, records[0].data.id)"><i class="fa fa-cloud"> Open in clouds </i></a>
+                </td>
+            </tr>
+        </xpath>
+        <xpath expr="//t[contains(@t-if, 'url')]" position="attributes">
+            <attribute name="t-if" add="!records[0].data.cloud_key" separator=" and "></attribute>
+        </xpath>
+    </t>
+    <t t-name="documents.DocumentsInspector.buttons" t-inherit="documents.DocumentsInspector.buttons" t-inherit-mode="extension">
+        <xpath expr="//t[contains(@t-if, 'records.length')]" position="attributes">
+            <attribute name="t-if">records.length and records.every(record => record.data.type === 'url' and !record.data.cloud_key)</attribute>
+        </xpath>
+        <xpath expr="//button[@t-on-click.stop.prevent='onShare']" position="attributes">
+            <attribute name="t-if">currentFolder.id and !records.every(rec => ['empty', 'url'].includes(rec._values.type) and !rec.data.cloud_key)</attribute>
+        </xpath>
+    </t>
+    <t t-name="documents.DocumentsInspector.previews" t-inherit="documents.DocumentsInspector.previews" t-inherit-mode="extension">
+        <xpath expr="//t[contains(@t-if, 'additionalRecordData.isImage')]" position="attributes">
+            <attribute name="t-if" add="!record.data.cloud_key" separator=" and "></attribute>
+        </xpath>
+    </t>
+
+</templates>

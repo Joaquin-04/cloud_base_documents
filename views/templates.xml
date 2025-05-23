@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="format_file_size" inherit_id="documents.format_file_size" name="Format file size">
+        <t t-if="G" position="before">
+            <t t-if="file_size == -1">
+                Unknown
+                <t t-set="G" t-value="0"/>
+                <t t-set="M" t-value="0"/>
+                <t t-set="K" t-value="0"/>
+                <t t-set="B" t-value=""/>
+            </t>
+        </t>
+    </template>
+    <template id="share_workspace_page" inherit_id="documents.share_workspace_page" name="Workspace Share">
+        <xpath expr="//div[hasclass('o_docs_cards_container')]/t/div" position="attributes">
+            <attribute name="t-if">document.type != 'url' or document.cloud_key</attribute>
+        </xpath>
+    </template>
+
+</odoo>
